@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Importando o ícone
 
 export default function App() {
@@ -16,36 +16,41 @@ export default function App() {
     { name: 'Português', grade: 9.0, absences: 1, classesHeld: 40, mention: 'Ótimo' },
     { name: 'História', grade: 7.0, absences: 3, classesHeld: 40, mention: 'Regular' },
     { name: 'Ciências', grade: 8.0, absences: 0, classesHeld: 40, mention: 'Bom' },
+    { name: 'Geografia', grade: 8.5, absences: 1, classesHeld: 40, mention: 'Bom' },
+    { name: 'Educação Física', grade: 9.5, absences: 0, classesHeld: 40, mention: 'Ótimo' },
+    { name: 'Artes', grade: 7.5, absences: 2, classesHeld: 40, mention: 'Regular' },
+    // Adicione mais matérias se necessário para testar o scroll
   ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Boletim Escolar</Text>
-      <View style={styles.infoContainer}>
-        <View style={styles.imageContainer}>
-          <Icon name="user" size={50} color="#fff" /> {/* Ícone de silhueta */}
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.name}>{student.name}</Text>
-          <Text style={styles.class}>Turma: {student.class}</Text>
-          <Text style={styles.registrationNumber}>Matrícula: {student.registrationNumber}</Text>
-        </View>
-      </View>
-
-      <View style={styles.reportCard}>
-        <Text style={styles.reportTitle}>Boletim</Text>
-        {subjects.map((subject, index) => (
-          <View key={index} style={styles.subjectContainer}>
-            <Text style={styles.subjectName}>{subject.name}</Text>
-            <Text style={styles.subjectDetail}>Nota: {subject.grade}</Text>
-            <Text style={styles.subjectDetail}>Faltas: {subject.absences}</Text>
-            <Text style={styles.subjectDetail}>Aulas Dadas: {subject.classesHeld}</Text>
-            <Text style={styles.subjectDetail}>Menção: {subject.mention}</Text>
-            <View style={styles.separator} /> {/* Separador entre as matérias */}
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <Text style={styles.header}>Boletim Escolar</Text>
+        <View style={styles.infoContainer}>
+          <View style={styles.imageContainer}>
+            <Icon name="user" size={50} color="#fff" /> {/* Ícone de silhueta */}
           </View>
-        ))}
-      </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.name}>{student.name}</Text>
+            <Text style={styles.class}>Turma: {student.class}</Text>
+            <Text style={styles.registrationNumber}>Matrícula: {student.registrationNumber}</Text>
+          </View>
+        </View>
 
+        <View style={styles.reportCard}>
+          <Text style={styles.reportTitle}>Boletim</Text>
+          {subjects.map((subject, index) => (
+            <View key={index} style={styles.subjectContainer}>
+              <Text style={styles.subjectName}>{subject.name}</Text>
+              <Text style={styles.subjectDetail}>Nota: {subject.grade}</Text>
+              <Text style={styles.subjectDetail}>Faltas: {subject.absences}</Text>
+              <Text style={styles.subjectDetail}>Aulas Dadas: {subject.classesHeld}</Text>
+              <Text style={styles.subjectDetail}>Menção: {subject.mention}</Text>
+              <View style={styles.separator} /> {/* Separador entre as matérias */}
+            </View>
+          ))}
+        </View>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
@@ -55,9 +60,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5', // Cor de fundo mais clara
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+  },
+  scrollViewContent: {
     padding: 16,
+    paddingBottom: 20, // Adiciona um pouco de espaço no final
   },
   header: {
     fontSize: 24,
@@ -90,7 +96,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,  },
+    marginRight: 16,
+  },
   textContainer: {
     flexDirection: 'column',
   },
